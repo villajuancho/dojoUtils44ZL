@@ -1,0 +1,19 @@
+{
+  "name": "dojoutils44zl",
+  "version": "1.0.0",
+  "description": "librerias para dojo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/villajuancho/dojoUtils44ZL.git"
+  },
+  "author": "Juan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/villajuancho/dojoUtils44ZL/issues"
+  },
+  "homepage": "https://github.com/villajuancho/dojoUtils44ZL#readme"
+}
