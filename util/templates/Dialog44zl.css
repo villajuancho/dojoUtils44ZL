@@ -1,0 +1,34 @@
+.Dialog44zl {
+    background-color: #1e1e1e;
+    opacity: 0.8;
+    overflow-x: hidden !important;
+    overflow-y: hidden;
+    /*border: 1px solid #525252 !important;*/
+    box-shadow: 4px 4px 4px #CC70127A !important;
+    -moz-box-shadow: 4px 4px 4px #CC70127A !important;
+    -webkit-box-shadow: 4px 4px 4px #CC70127A !important;
+    /*border-radius: 3px;*/
+    border-radius: 15px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+    border: 1px solid #CC7012;
+}
+
+.Dialog44zl > .dijitDialogTitleBar  {
+    background-color: #cc70127A;
+    border-bottom: 2px #CC7012;
+    border-bottom-style: solid;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: move;
+
+}
+
+.DialogButtons44zl {
+	padding-bottom: 15px;
+	padding-top: 10px;
+	margin: 5px;
+	display: flex;
+	flex-direction: row-reverse;
+}
