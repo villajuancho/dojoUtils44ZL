@@ -23,6 +23,8 @@ define([
 	"dijit/form/Button",
 	"dojox/layout/FloatingPane",
 	"dijit/layout/ContentPane",
+	"./load-css",
+	"dojo/text!./templates/FloatingPane44zl.css",
 	"./constants"
 ],
 function (
@@ -31,9 +33,11 @@ function (
 	xFloatingPane,
 	ContentPane,
 	//Library, 
+	LoadCss,
+	css, 
 	constants
 ) {	
-	return declare("44zl.util.FloatingPane44zl", [xFloatingPane], {
+	return declare("dojoUtils44zl.util.FloatingPane44zl", [xFloatingPane], {
 		
 		_buttonsDiv: null,
 		_closeButton: null,
@@ -41,10 +45,21 @@ function (
 		_left: null,
 		
 		constructor: function(kwArgs, otro) {
-
 		
 			//cambiar container
 			this.container = dom.byId("cysPrincipal");
+			
+			var baseURLdojoUtils44zl = '';
+
+			for(i=0;i<dojoConfig.packages.length;i++){
+				if(dojoConfig.packages[i].location.indexOf("dojoUtils44zl")>=0){
+					baseURLdojoUtils44zl = dojoConfig.packages[i].location;
+					break;
+				}
+			}
+
+			var css2 = css.replace(/baseURLdojoUtils44zl/gi,baseURLdojoUtils44zl);
+			LoadCss.text(this,css2);
 			this.style = "position:absolute;top:500;left:500;width:200px;height:200px;visibility:hidden;",
         
 			//propiedades por defecto
@@ -132,7 +147,9 @@ function (
 			}
 			
 			this._resize();
-
+			console.log("dojoConfig");
+			console.log(dojoConfig);
+			
 		},
 		
 

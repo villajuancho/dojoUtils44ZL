@@ -1,0 +1,84 @@
+.FloatingMini44zl {
+    background-color: #1e1e1e;
+    box-shadow: 4px 4px 4px #4a4a4a7A;
+    border: 1px solid #4a4a4a;
+    opacity: 0.8;
+    overflow-x: hidden !important;
+    overflow-y: hidden;
+    border-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 0px;
+}
+
+.FloatingMini44zl > .dojoxFloatingPaneTitle  {
+    background-color: #4a4a4a;
+    border-bottom: 2px #1e1e1e;
+    border-bottom-style: solid;
+    height: 10px;
+    padding: 0px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: move;
+    overflow-y: hidden;
+    z-index: 500;
+    position: relative;
+    left: 0px;
+    top: 0px;
+}
+
+.dojoxFloatingPaneCanvas {
+    z-index: 10;
+    left: 0px;
+    top: 0px;
+    position: relative;
+}
+
+.FloatingMini44zl > .dojoxFloatingPaneTitle:hover {
+    height: 40px;
+    opacity: 0.8;
+}
+
+.FloatingMini44zl > .dojoxFloatingPaneTitle:hover + .dojoxFloatingPaneCanvas{
+    margin-top: -30px;
+}
+
+.FloatingMiniTitle44zl {
+    left: 50%;
+    position: relative;
+    font-size: 6px;
+}
+
+.FloatingMiniActions44zl {
+    display: flex;
+    flex-direction: row-reverse;
+    padding-top: 4px;
+}
+
+.FloatingMiniClose44zl {
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.FloatingMiniClose44zl:hover {
+    background-color: var(--cys-bg-color);
+}
+
+.FloatingMini44zl .dojoxResizeHandle {
+    float: right;
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    width: 13px;
+    height: 13px;
+    z-index: 20;
+    line-height: 0px;
+    cursor: nw-resize;
+}
+
+

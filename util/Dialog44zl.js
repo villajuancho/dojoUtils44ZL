@@ -22,7 +22,7 @@ define([
 	"dijit/focus",
 	"dijit/form/Button",
 	"dijit/Dialog",
-	"util/load-css",
+	"./load-css",
 	"dojo/text!./templates/Dialog44zl.css",
 	"./constants"
 ],
@@ -34,7 +34,7 @@ function (
 	css, 
 	constants
 ) {	
-	return declare("44zl.util.Dialog44zl", [dDialog], {
+	return declare("dojoUtils44zl.util.Dialog44zl", [dDialog], {
 		
 		_buttons: {},
 		
