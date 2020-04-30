@@ -45,8 +45,8 @@ function (
 		_left: null,
 		_resizeIcon: false,
 		
-		constructor: function(kwArgs, otro) {
-		
+		constructor: function(kwArgs) {
+			//this.inherited(arguments);
 			//cambiar container
 			//this.container = dom.byId("cysPrincipal");
 			
@@ -80,13 +80,13 @@ function (
 		
 		postCreate: function() {
 			this.inherited(arguments);
-			
+	  		
 			domClass.add(this.domNode, "FloatingMini44zl");
 			
 			this._style = {
 				//position: "relative",
-				top: "50px",
-				left: "50px",
+				top: "10em",
+				left: "15em",
 				width: "200px",
 				height: "200px",
 				visibility: "hidden"
@@ -94,8 +94,6 @@ function (
             
             this.paneStyle = this._getStyle();
             
-			this._resize();
-			
 			this.titleNode.innerHTML = "xxxx";
 			domClass.add(this.titleNode, "FloatingMiniTitle44zl");
 
@@ -110,63 +108,62 @@ function (
 			//}, this.canvas, "last"));
 			}, this._buttonsDiv, "last"));
 
-			on(this._closeButton, "click", lang.hitch(this,this.onClick_closeButton));
-			this._closeButton.innerHTML = '<svg height="16" width="16">' +
+			this.own(on(this._closeButton, "click", lang.hitch(this,this.onClick_closeButton)));
+			
+			this._closeButton.innerHTML = '<svg height="1em" width="1em" viewBox="0 0 16 16">' +
 				'<path d="M1 1 L15 15 M1 15 L15 1" stroke="var(--cys-icon-color)" stroke-width="2" fill="none" />'+
 			'</svg>';
 			
 
-			if (this.container) {
+			
+		},
+		
+		_f_setContainer: function(container){
+			this.container = container;
+			
 				this.moveable = new dndMove.boxConstrainedMoveable(
 					this.domNode, {
 						handle: this.focusNode,
 						within: true
 					}
 				);
+				this.own(this.moveable);
 				this.moveable.constraints = lang.hitch(this, function(info) {
 					var box = domGeometry.getContentBox(this.container);
 					return box;
 				});
 				
-				
-				topic.subscribe("/dnd/move/stop", lang.hitch(this, function(Node) {
-					console.log("MOVE STOP: " + Node.node.id);
-					if (this.domNode.id == Node.node.id) {
-						var pos = domGeometry.position(this.domNode);
-						var x = pos.x;
-						var y = pos.y;
-						var w = pos.w;
-						var h = pos.h;
-						
-						if (x != 0 && y != 0 && w != 0 && h != 0) {
-							// guarda la ultima posicion
-							var cstyle = domStyle.getComputedStyle(this.domNode);
-							this.paneStyle.top = cstyle.top;
-							this.paneStyle.left = cstyle.left;
+				this.own(
+					topic.subscribe("/dnd/move/stop", lang.hitch(this, function(Node) {
+						//console.log("MOVE STOP: " + Node.node.id);
+						if (this.domNode.id == Node.node.id) {
+							var pos = domGeometry.position(this.domNode);
+							var x = pos.x;
+							var y = pos.y;
+							var w = pos.w;
+							var h = pos.h;
+							
+							if (x != 0 && y != 0 && w != 0 && h != 0) {
+								// guarda la ultima posicion
+								var cstyle = domStyle.getComputedStyle(this.domNode);
+								this.paneStyle.top = cstyle.top;
+								this.paneStyle.left = cstyle.left;
+							}
+
+							this._setNewPos(pos);
 						}
 
-						this._setNewPos(pos);
-					}
-
-				}));
+					}))
+				);
 				/*
 				this.moveable.onMoveStop = function(x,y){
-					
-					
+				
 				};
 				*/
 
-			}
-			
-			
+			domConstruct.place(this.domNode, this.container, "last");
 
-			this._resize();
-			
-			console.log("dojoConfig");
-			console.log(dojoConfig);
-			
 		},
-		
 
 		onClick_closeButton: function() {
 			this.hide();
@@ -189,7 +186,7 @@ function (
 				*/
 				this._resizeIcon = true;
 				var resizeHandle = query(".dojoxResizeHandle", this.canvas);
-				resizeHandle[0].innerHTML = '<svg height="13" width="13">'+
+				resizeHandle[0].innerHTML = '<svg height="0.9em" width="0.9em" viewBox="0 0 13 13">'+
 					'<path d="M0 13 L13 13 L13 0" stroke="var(--cys-icon-color)" stroke-width="2" fill="none" />'+
 					'<path d="M3 9 L9 9 L9 3" stroke="var(--cys-icon-color)" stroke-width="2" fill="none" />'+
 				'</svg>';
@@ -209,7 +206,8 @@ function (
 			this.inherited(arguments);
 			
 			var pos = domGeometry.position(this.domNode);
-			if (pos.w != 0 && pos.h != 0) {
+			
+			if (pos.w > 10 && pos.h >10 ) {
 				this.paneStyle.width = pos.w + "px";
 				this.paneStyle.height = pos.h + "px";
 			}

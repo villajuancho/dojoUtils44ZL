@@ -5,8 +5,8 @@
     opacity: 0.8;
     overflow-x: hidden !important;
     overflow-y: hidden;
-    border-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-radius: 0.3em;
+    border-bottom-left-radius: 0.3em;
     border-bottom-right-radius: 0px;
 }
 
@@ -14,9 +14,9 @@
     background-color: #4a4a4a;
     border-bottom: 2px #1e1e1e;
     border-bottom-style: solid;
-    height: 10px;
+    height: 0.7em;
     padding: 0px;
-    font-size: 16px;
+    font-size: 1em;
     font-weight: bold;
     cursor: move;
     overflow-y: hidden;
@@ -34,31 +34,31 @@
 }
 
 .FloatingMini44zl > .dojoxFloatingPaneTitle:hover {
-    height: 40px;
+    height: 2.5em;
     opacity: 0.8;
 }
 
 .FloatingMini44zl > .dojoxFloatingPaneTitle:hover + .dojoxFloatingPaneCanvas{
-    margin-top: -30px;
+    margin-top: -1.8em
 }
 
 .FloatingMiniTitle44zl {
     left: 50%;
     position: relative;
-    font-size: 6px;
+    font-size: 0.3em;
 }
 
 .FloatingMiniActions44zl {
     display: flex;
     flex-direction: row-reverse;
-    padding-top: 4px;
+    padding-top: 0..3em;
 }
 
 .FloatingMiniClose44zl {
     cursor: pointer;
-    height: 25px;
-    width: 25px;
-    border-radius: 18px;
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -74,8 +74,8 @@
     position: absolute;
     right: 2px;
     bottom: 2px;
-    width: 13px;
-    height: 13px;
+    width: 0.9em;
+    height: 0.9em;
     z-index: 20;
     line-height: 0px;
     cursor: nw-resize;
