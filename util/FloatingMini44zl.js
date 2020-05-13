@@ -243,7 +243,8 @@ function (
 			local.sx = local.x + local.w;
 			local.sy = local.y + local.h;
 			this.bloque = null;
-			objectList.forEach(element => {
+
+			array.forEach(objectList, function(element){
 				if(element.id != this.domNode.id){
 					var pos = domGeometry.position(element);
 					pos.sx = pos.x + pos.w;
@@ -314,8 +315,7 @@ function (
 			local.sx = local.x + local.w;
 			local.sy = local.y + local.h;
 
-
-			objectList.forEach(element => {
+			array.forEach(objectList, function(element){
 				if(element.id != this.domNode.id){
 					var pos = domGeometry.position(element);
 					pos.sx = pos.x + pos.w;

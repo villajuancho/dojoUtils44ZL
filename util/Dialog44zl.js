@@ -71,7 +71,7 @@ function (
 			
 			var cerrar = true;
 
-			this.buttons.forEach(lang.hitch(this,function(boton){
+			array.forEach(this.buttons,lang.hitch(this,function(boton){
 				if(boton.name && boton.name == 'cerrar'){
 					cerrar = false;
 				}
