@@ -244,7 +244,7 @@ function (
 			local.sy = local.y + local.h;
 			this.bloque = null;
 
-			array.forEach(objectList, function(element){
+			array.forEach(objectList, lang.hitch(this,function(element){
 				if(element.id != this.domNode.id){
 					var pos = domGeometry.position(element);
 					pos.sx = pos.x + pos.w;
@@ -300,7 +300,7 @@ function (
 					}
 
 				}
-			});
+			}));
 		},
 
 		_setSizeBloque: function(){
@@ -315,7 +315,7 @@ function (
 			local.sx = local.x + local.w;
 			local.sy = local.y + local.h;
 
-			array.forEach(objectList, function(element){
+			array.forEach(objectList, lang.hitch(this,function(element){
 				if(element.id != this.domNode.id){
 					var pos = domGeometry.position(element);
 					pos.sx = pos.x + pos.w;
@@ -331,7 +331,7 @@ function (
 
 					this._resize();
 				}
-			});
+			}));
 			
 		},
 
