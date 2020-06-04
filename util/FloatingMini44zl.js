@@ -44,11 +44,13 @@ function (
 		_top: null,
 		_left: null,
 		_resizeIcon: false,
+		_shiftContainerPos: {
+			l: 0,
+			t: 0
+		},
 		
 		constructor: function(kwArgs) {
 			//this.inherited(arguments);
-			//cambiar container
-			//this.container = dom.byId("cysPrincipal");
 			
 			var baseURLdojoUtils44zl = '';
 
@@ -82,20 +84,24 @@ function (
 			this.inherited(arguments);
 	  		
 			domClass.add(this.domNode, "FloatingMini44zl");
+			domClass.add(this.containerNode, "FloatingMini44zlContainer");
 			
 			this._style = {
 				//position: "relative",
-				top: "10em",
-				left: "15em",
+				top: "150",
+				left: "200",
 				width: "200px",
 				height: "200px",
 				visibility: "hidden"
 			};
             
             this.paneStyle = this._getStyle();
-            
-			this.titleNode.innerHTML = "xxxx";
-			domClass.add(this.titleNode, "FloatingMiniTitle44zl");
+            this.grip = domConstruct.create('div',{
+				class: "FloatingMiniTitle44zl"
+			},this.titleNode);
+			this.grip.innerHTML = "xxxx";
+			//this.titleNode.innerHTML = "xxxx";
+			//domClass.add(this.titleNode, "FloatingMiniTitle44zl");
 
 			//crea el boton de cerrar
 			this.own(this._buttonsDiv = domConstruct.create("div", {
@@ -128,41 +134,42 @@ function (
 					}
 				);
 				this.own(this.moveable);
-				this.moveable.constraints = lang.hitch(this, function(info) {
-					var box = domGeometry.getContentBox(this.container);
-					return box;
-				});
+					
+				this.moveable.constraints = lang.hitch(this, this.constraintDnd);
 				
 				this.own(
-					topic.subscribe("/dnd/move/stop", lang.hitch(this, function(Node) {
-						//console.log("MOVE STOP: " + Node.node.id);
-						if (this.domNode.id == Node.node.id) {
-							var pos = domGeometry.position(this.domNode);
-							var x = pos.x;
-							var y = pos.y;
-							var w = pos.w;
-							var h = pos.h;
-							
-							if (x != 0 && y != 0 && w != 0 && h != 0) {
-								// guarda la ultima posicion
-								var cstyle = domStyle.getComputedStyle(this.domNode);
-								this.paneStyle.top = cstyle.top;
-								this.paneStyle.left = cstyle.left;
-							}
-
-							this._setNewPos(pos);
-						}
-
-					}))
+					topic.subscribe("/dnd/move/stop", lang.hitch(this, this.stopDnd))
 				);
-				/*
-				this.moveable.onMoveStop = function(x,y){
 				
-				};
-				*/
 
 			domConstruct.place(this.domNode, this.container, "last");
 
+		},
+		constraintDnd: function(){
+			var box = domGeometry.getContentBox(this.container);
+					box.l = box.l - this._shiftContainerPos.l;
+					box.t = box.t - this._shiftContainerPos.t;
+					return box;
+		},
+
+		stopDnd: function(Node) {
+				//console.log("MOVE STOP: " + Node.node.id);
+				if (this.domNode.id == Node.node.id) {
+					var pos = domGeometry.position(this.domNode);
+					var x = pos.x;
+					var y = pos.y;
+					var w = pos.w;
+					var h = pos.h;
+					
+					if (x != 0 && y != 0 && w != 0 && h != 0) {
+						// guarda la ultima posicion
+						var cstyle = domStyle.getComputedStyle(this.domNode);
+						this.paneStyle.top = cstyle.top;
+						this.paneStyle.left = cstyle.left;
+					}
+
+					this._setNewPos(pos);
+				}
 		},
 
 		onClick_closeButton: function() {
@@ -293,14 +300,22 @@ function (
 					}
 					
 					if(setItem){
-						this.bloque = element;
-						this.paneStyle.left = x + "px";
-						this.paneStyle.top = y + "px";
-						this._resize();
+						var posContainer = domGeometry.position(this.container);
+						x = x - posContainer.x;
+						y = y - posContainer.y;
+						if (x>=0 && y>=0){
+							this.bloque = element;
+							this.paneStyle.left = x + "px";
+							this.paneStyle.top = y + "px";
+							this._resize();
+						}
+						
 					}
 
 				}
 			}));
+			setTimeout(lang.hitch(this,"_onChangeGeometry","_setNewPos"),200);
+			
 		},
 
 		_setSizeBloque: function(){
@@ -332,6 +347,9 @@ function (
 					this._resize();
 				}
 			}));
+
+			setTimeout(lang.hitch(this,"_onChangeGeometry","_setSizeBloque"),200);
+			
 			
 		},
 
@@ -365,6 +383,10 @@ function (
 				width = parseInt(this._editWidth);
 			}
 			var box = domGeometry.getContentBox(this.container);
+			
+		},
+		
+		_onChangeGeometry: function(){
 			
 		}
 		

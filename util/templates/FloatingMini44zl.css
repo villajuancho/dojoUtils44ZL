@@ -43,15 +43,15 @@
 }
 
 .FloatingMiniTitle44zl {
-    left: 50%;
-    position: relative;
     font-size: 0.3em;
+    width: 100%;
+    text-align: center;
 }
 
 .FloatingMiniActions44zl {
     display: flex;
     flex-direction: row-reverse;
-    padding-top: 0..3em;
+    padding-top: 0.3em;
 }
 
 .FloatingMiniClose44zl {
@@ -81,4 +81,9 @@
     cursor: nw-resize;
 }
 
-
+.FloatingMini44zlContainer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
