@@ -314,6 +314,8 @@ function (
 
 				}
 			}));
+
+
 			setTimeout(lang.hitch(this,"_onChangeGeometry","_setNewPos"),200);
 			
 		},
@@ -327,9 +329,10 @@ function (
 			var setItem = false;
 			
 			var local = domGeometry.position(this.domNode);
+			var final = local;
 			local.sx = local.x + local.w;
 			local.sy = local.y + local.h;
-
+			
 			array.forEach(objectList, lang.hitch(this,function(element){
 				if(element.id != this.domNode.id){
 					var pos = domGeometry.position(element);
@@ -338,15 +341,35 @@ function (
 					
 					if(pos.sx-gap < local.sx && local.sx < pos.sx+gap){
 						x = pos.sx - local.x - 2; 
+						final.w = x
 						this.paneStyle.width = x + "px";
 					}else if(pos.sy-gap < local.sy && local.sy < pos.sy+gap){
 						y = pos.sy - local.y - 2;
+						final.h = y
 						this.paneStyle.height = y + "px";
 					}
 
 					this._resize();
 				}
 			}));
+			
+			var conPos = domGeometry.position(this.container);
+			if((final.x + final.w) > (conPos.x + conPos.w)){
+				final.w = (conPos.w + conPos.x) - final.x - 2;
+				this.paneStyle.width = final.w + "px";
+			}
+			if((final.y + final.h) > (conPos.y + conPos.h)){
+				final.h = (conPos.y + conPos.h) - final.y - 1;
+				this.paneStyle.height = final.h + "px";
+			}
+			final.w = final.w - 2;
+			final.h = final.h - 14;
+			var canvasStyle = {
+				width: final.w + "px",
+				height: final.h + "px"
+			}
+			domStyle.set(this.canvas, canvasStyle);
+			this._resize();
 
 			setTimeout(lang.hitch(this,"_onChangeGeometry","_setSizeBloque"),200);
 			
