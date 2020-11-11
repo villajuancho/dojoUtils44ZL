@@ -119,6 +119,7 @@ function (
 			this._closeButton.innerHTML = '<svg height="1em" width="1em" viewBox="0 0 16 16">' +
 				'<path d="M1 1 L15 15 M1 15 L15 1" stroke="var(--cys-icon-color)" stroke-width="2" fill="none" />'+
 			'</svg>';
+			this._resize();
 			
 
 			
@@ -224,8 +225,8 @@ function (
 		},
 		
 		startup: function() {
-			this._resize();
 			this.inherited(arguments);
+			
 		},
 		
 		focus: function() {
@@ -252,7 +253,7 @@ function (
 			this.bloque = null;
 
 			array.forEach(objectList, lang.hitch(this,function(element){
-				if(element.id != this.domNode.id){
+				if(element.id != this.domNode.id && element.style.visibility != "hidden"){
 					var pos = domGeometry.position(element);
 					pos.sx = pos.x + pos.w;
 					pos.sy = pos.y + pos.h;
