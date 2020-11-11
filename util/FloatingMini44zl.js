@@ -224,8 +224,8 @@ function (
 		},
 		
 		startup: function() {
-			this.inherited(arguments);
 			this._resize();
+			this.inherited(arguments);
 		},
 		
 		focus: function() {
